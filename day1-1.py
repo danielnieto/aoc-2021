@@ -1,7 +1,8 @@
 import math
+
 arr = []
 
-with open('day1-1-input.txt', 'r') as file:
+with open("day1-1-input.txt", "r") as file:
     for line in file:
         arr.append(int(line))
 
