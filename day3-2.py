@@ -1,15 +1,10 @@
 from enum import Enum, auto
 from typing import List, Dict
 
-bits = []
 
 class Rating(Enum):
     OXYGEN = auto()
     CO2 = auto()
-
-with open("day3-input.txt") as lines:
-    for line in lines:
-        bits.append([int(c) for c in line.strip()])
 
 
 def count_values_at_column(arr: List[List[int]], x: int) -> Dict[int, int]:
@@ -31,8 +26,6 @@ def get_least_common_value(counter: Dict[int, int]) -> int:
 def are_equally_common(counter: Dict[int, int]) -> bool:
     return counter[0] == counter[1]
 
-RATING_OPS = {Rating.OXYGEN: get_most_common_value, Rating.CO2: get_least_common_value}
-VALUES_TO_KEEP = {Rating.OXYGEN: 1, Rating.CO2: 0}
 
 def get_rating(rating: Rating, readings: List[List[int]]) -> str:
     arr = readings.copy()
@@ -51,7 +44,18 @@ def get_rating(rating: Rating, readings: List[List[int]]) -> str:
 
     return "".join([str(c) for c in arr[0]])
 
-oxygen_int = int(get_rating(Rating.OXYGEN, bits), base=2)
-co2_int = int(get_rating(Rating.CO2, bits), base=2)
 
-print(co2_int * oxygen_int)
+RATING_OPS = {Rating.OXYGEN: get_most_common_value, Rating.CO2: get_least_common_value}
+VALUES_TO_KEEP = {Rating.OXYGEN: 1, Rating.CO2: 0}
+
+if __name__ == "__main__":
+    bits = []
+
+    with open("day3-input.txt") as lines:
+        for line in lines:
+            bits.append([int(c) for c in line.strip()])
+
+    oxygen_int = int(get_rating(Rating.OXYGEN, bits), base=2)
+    co2_int = int(get_rating(Rating.CO2, bits), base=2)
+
+    print(co2_int * oxygen_int)
