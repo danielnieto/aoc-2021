@@ -63,15 +63,18 @@ def main():
 
     for draw in draws:
         for board in boards:
-            if board.is_still_playing:
-                board.mark(draw)
-                if board.has_won():
-                    board.is_still_playing = False
-                    place += 1
+            if not board.is_still_playing:
+                continue
 
-                    if place == len(boards):
-                        print(board.get_sum_of_unmarked_values() * draw)
-                        return
+            board.mark(draw)
+
+            if board.has_won():
+                board.is_still_playing = False
+                place += 1
+
+            if place == len(boards):
+                print(board.get_sum_of_unmarked_values() * draw)
+                return
 
 
 if __name__ == "__main__":
